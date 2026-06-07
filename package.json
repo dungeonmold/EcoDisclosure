@@ -1,8 +1,12 @@
 {
+  "name": "ecodisclosure",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "axios": "^1.16.1",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "pdfkit": "^0.18.0"
+    "axios": "^1.x.x",
+    "cors": "^2.x.x",
+    "express": "^4.x.x"
   }
 }

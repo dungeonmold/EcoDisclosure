@@ -15,7 +15,7 @@ app.use(
     reportRoute
 );
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
 
@@ -23,3 +23,7 @@ app.listen(PORT, () => {
         `Server running on port ${PORT}`
     );
 });
+
+
+const path = require("path");
+   app.use(express.static(path.join(__dirname, "client")));
