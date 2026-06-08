@@ -12,22 +12,22 @@
 </head>
 <body>
 
-  <div class="splash-overlay" id="splashOverlay" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
+<div class="splash-overlay" id="splashOverlay" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
   <div class="splash-modal">
     <div class="splash-header">
       <div class="splash-eyebrow">Environmental Due Diligence</div>
       <h1 class="splash-title" id="splashTitle">Eco<em>Disclosure</em></h1>
-      <p class="splash-sub">Instant environmental property reports from authoritative federal and public datasets.</p>
+      <p class="splash-sub">Instant environmental property reports for any US address.</p>
     </div>
     <div class="splash-body">
-      <p class="splash-about">EcoDisclosure generates comprehensive environmental reports for any US address, pulling live data across flood risk, natural hazards, contamination, pollution sources, air quality, public health, community resilience, and more. Reports draw from over 17 federal and intergovernmental datasets — including FEMA, EPA, NOAA, USGS, and the ArcGIS Living Atlas — to give you a complete picture of the environmental conditions surrounding a property.</p>
+      <p class="splash-about">Get live data on flood risk, hazards, contamination, air quality, public health, and more. Drawn from FEMA, EPA, NOAA, USGS, and other federal sources.</p>
       <div class="splash-disclaimer">
-        <div class="splash-disclaimer-label">Important — please read</div>
-        <p class="splash-disclaimer-text">EcoDisclosure aggregates <strong>live federal and public datasets</strong> for informational purposes only. Reports are <strong>not</strong> a Phase I or Phase II Environmental Site Assessment, legal opinion, or professional environmental review. Data reflects conditions at time of query and may be incomplete or outdated. <strong>Always consult licensed environmental professionals before making real estate or financial decisions.</strong></p>
+        <div class="splash-disclaimer-label">Not a professional assessment</div>
+        <p class="splash-disclaimer-text">EcoDisclosure is for informational use only. This is not a Phase I/II ESA, legal opinion, or professional review. Always consult a licensed expert before making real estate or financial decisions.</p>
       </div>
       <div class="splash-footer">
-        <div class="splash-sources">Data sourced from FEMA · EPA · NOAA · USGS · ArcGIS Living Atlas · Census Bureau · NPS · BLS</div>
-        <button class="splash-accept" id="splashAcceptBtn">I understand — open report</button>
+        <div class="splash-sources">Sources: FEMA · EPA · NOAA · USGS · ArcGIS · Census · NPS · BLS</div>
+        <button class="splash-accept" id="splashAcceptBtn">I understand · Open report</button>
       </div>
     </div>
   </div>
@@ -54,50 +54,69 @@
   <!-- ── Main ───────────────────────────────────────────── -->
   <main class="main-container">
 
-    <!-- Search -->
-    <section class="search-card">
-      <div class="search-label-group">
+<!-- Search -->
+<section class="search-card">
+    <div class="search-label-group">
         <h2>Generate Property Report</h2>
-        <p>Enter an address or place a pin on the map.</p>
-      </div>
-      <div class="search-input-group">
-        <div class="input-wrap" id="addressInputWrap">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-          </svg>
-          <input type="text" id="addressInput" placeholder="search address">
-          <div class="input-error-msg" id="addressError">Please enter an address or drop a pin.</div>
+        <p>Enter a property address below, or drop a pin on the map to use exact coordinates as your report location.</p>
+    </div>
+
+    <!-- Step indicators -->
+    <div class="search-steps">
+        <div class="search-step">
+            <span class="step-num">1</span>
+            <span class="step-text">Enter an address <em>or</em> open the map to drop a pin</span>
         </div>
-        <button class="btn-outline" id="pinToggleBtn" title="Drop a pin on the map">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/>
-          </svg>
-          Pin
-        </button>
-        <button class="btn-primary" id="generateBtn">Generate Report</button>
-      </div>
+        <div class="search-step">
+            <span class="step-num">2</span>
+            <span class="step-text">Click <strong>Generate Report</strong> to run the analysis</span>
+        </div>
+    </div>
 
-      <!-- Pin mode banner -->
-      <div id="pinModeBanner" class="pin-banner hidden">
-        <span>Click anywhere on the map to drop a pin. Click again to move it.</span>
+    <div class="search-input-group">
+        <div class="input-wrap" id="addressInputWrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <input type="text" id="addressInput" placeholder="e.g. 123 Main St, Chicago, IL">
+            <div class="input-error-msg" id="addressError">Please enter an address or drop a pin.</div>
+        </div>
+
+        <div class="search-actions">
+            <button class="btn-outline" id="pinToggleBtn" title="Drop a pin on the map">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/>
+                </svg>
+                Open Map to Pin Location
+            </button>
+            <button class="btn-primary" id="generateBtn">Generate Report</button>
+        </div>
+    </div>
+
+    <!-- Pin mode banner -->
+    <div id="pinModeBanner" class="pin-banner hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>Click anywhere on the map to place your pin. Click again to move it. Then click <strong>Generate Report</strong>.</span>
         <button class="btn-ghost" id="cancelPinBtn">Cancel</button>
-      </div>
+    </div>
 
-      <!-- Pin mode mini-map -->
-      <div id="pinMapWrap" class="pin-map-wrap hidden">
+    <!-- Pin mode mini-map -->
+    <div id="pinMapWrap" class="pin-map-wrap hidden">
         <div id="pinMap"></div>
         <div id="pinCoords" class="pin-coords"></div>
-      </div>
+    </div>
 
-      <div id="loading" class="hidden">
+    <div id="loading" class="hidden">
         <div class="loading-spinner"></div>
         <div class="loading-steps">
-          <div class="loading-step" id="loadingPrimary" style="font-weight:600;color:var(--g700)">Generating environmental report…</div>
-          <div class="loading-step" id="loadingSecondary">Querying FEMA, EPA, NOAA, Census, and ArcGIS datasets</div>
-          <div class="loading-step" id="loadingDatasets" style="font-size:11px;color:var(--i500);margin-top:2px"></div>
+            <div class="loading-step" id="loadingPrimary" style="font-weight:600;color:var(--g700)">Generating environmental report…</div>
+            <div class="loading-step" id="loadingSecondary">Querying FEMA, EPA, NOAA, Census, and ArcGIS datasets</div>
+            <div class="loading-step" id="loadingDatasets" style="font-size:11px;color:var(--i500);margin-top:2px"></div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <!-- Report -->
     <section id="reportSection" class="hidden">
