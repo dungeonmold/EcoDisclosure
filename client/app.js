@@ -2,7 +2,7 @@
 // CONFIGURATION
 // ======================================================
 
-const API_URL = "api/report";
+const API_URL = "/api/report";
 let map, propertyMarker, layerGroups = {}, legendControl, layerControl;
 
 const LAYER_STYLES = {
