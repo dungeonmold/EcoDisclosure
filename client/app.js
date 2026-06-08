@@ -2,8 +2,7 @@
 // CONFIGURATION
 // ======================================================
 
-const API_URL = "/api/report";
-
+const API_URL = "http://localhost:3000/api/report";
 let map, propertyMarker, layerGroups = {}, legendControl, layerControl;
 
 const LAYER_STYLES = {
@@ -52,8 +51,13 @@ initSplash();
  * Derives six risk indicator objects from the already-fetched report data.
  * Each indicator: { label, value, severity: "high"|"moderate"|"low"|"unknown" }
  *
- * All logic is intentionally transparent — every bucket maps directly to a
- * specific field in a specific federal dataset so it can be explained to users.
+ * Indicators:
+ *   1. Flood Exposure        — FEMA NFHL flood zone classification
+ *   2. Contamination Proximity — EPA Superfund, RCRA, Brownfields, NPDES
+ *   3. Air Quality (PM2.5)   — EPA AirNow monitor network
+ *   4. Wildfire Risk         — Active incidents + USFS tract risk score; drought as context
+ *   5. Social Vulnerability  — ArcGIS Living Atlas population vulnerability index (percentile)
+ *   6. Community Health      — County Health Rankings life expectancy + uninsured rate
  */
 function computeRiskIndicators(data) {
     const indicators = [];
@@ -74,14 +78,19 @@ function computeRiskIndicators(data) {
                     : `Low-risk zone(s): ${zones}`
         });
     } else {
-        indicators.push({ label: "Flood Exposure", severity: "unknown", value: "No FEMA data returned" });
+        indicators.push({
+            label:    "Flood Exposure",
+            severity: "unknown",
+            value:    "No FEMA flood zone data returned"
+        });
     }
 
     // ── 2. Contamination Proximity (EPA FRS) ───────────────────────────────
-    const superfund = (data.superfundSites  || []).length;
-    const hazWaste  = (data.hazardousWaste  || []).length;
-    const brown     = (data.brownfields     || []).length;
-    const water     = (data.waterPollution  || []).length;
+    const superfund = (data.superfundSites || []).length;
+    const hazWaste  = (data.hazardousWaste || []).length;
+    const brown     = (data.brownfields    || []).length;
+    const water     = (data.waterPollution || []).length;
+
     if (superfund || hazWaste || brown || water) {
         const parts = [
             superfund && `${superfund} Superfund`,
@@ -89,98 +98,153 @@ function computeRiskIndicators(data) {
             brown     && `${brown} brownfield`,
             water     && `${water} NPDES discharge`
         ].filter(Boolean);
+
+        // Superfund or active hazardous waste = high; brownfields or multiple
+        // discharge permits = moderate (brownfields are lower severity than NPL sites)
+        const severity = (superfund || hazWaste)
+            ? "high"
+            : (brown >= 1 || water >= 3)
+                ? "moderate"
+                : "low";
+
         indicators.push({
             label:    "Contamination Proximity",
-            severity: superfund || hazWaste ? "high" : brown || water >= 3 ? "moderate" : "moderate",
+            severity,
             value:    parts.join(", ") + (parts.length === 1 ? " site nearby" : " sites nearby")
         });
     } else {
-        indicators.push({ label: "Contamination Proximity", severity: "low", value: "No EPA-listed sites within search radius" });
+        indicators.push({
+            label:    "Contamination Proximity",
+            severity: "low",
+            value:    "No EPA-listed sites within search radius"
+        });
     }
 
-    // ── 3. Air Quality (ArcGIS / EPA AirNow PM2.5) ─────────────────────────
+    // ── 3. Air Quality (PM2.5) ─────────────────────────────────────────────
     const airMonitors = data.airQuality || [];
     if (airMonitors.length) {
         const avg = airMonitors.reduce((s, m) => s + m.pm25, 0) / airMonitors.length;
         // EPA PM2.5 breakpoints: Good <12, Moderate 12–35.4, USG 35.5–55.4, Unhealthy >55.4
         const severity = avg >= 35.5 ? "high" : avg >= 12 ? "moderate" : "low";
-        const label    = avg >= 55.4 ? "Unhealthy" : avg >= 35.5 ? "Unhealthy for Sensitive Groups" : avg >= 12 ? "Moderate" : "Good";
+        const aqiLabel = avg >= 55.4
+            ? "Unhealthy"
+            : avg >= 35.5
+                ? "Unhealthy for Sensitive Groups"
+                : avg >= 12
+                    ? "Moderate"
+                    : "Good";
         indicators.push({
             label:    "Air Quality (PM2.5)",
             severity,
-            value:    `${avg.toFixed(1)} µg/m³ avg — ${label} (${airMonitors.length} monitor${airMonitors.length > 1 ? "s" : ""})`
+            value:    `${avg.toFixed(1)} µg/m³ avg — ${aqiLabel} (${airMonitors.length} monitor${airMonitors.length > 1 ? "s" : ""})`
         });
     } else {
-        indicators.push({ label: "Air Quality (PM2.5)", severity: "unknown", value: "No monitor data within 25 mi" });
+        indicators.push({
+            label:    "Air Quality (PM2.5)",
+            severity: "unknown",
+            value:    "No monitor data within 25 mi"
+        });
     }
 
-    // ── 4. Wildfire & Drought (NOAA / ArcGIS Living Atlas) ─────────────────
+    // ── 4. Wildfire Risk ───────────────────────────────────────────────────
+    // Primary signal: active incidents within 50 mi + USFS tract risk score.
+    // Drought is shown as supporting context in the value string since it
+    // compounds fire risk but is not a standalone property hazard for most areas.
     const fires    = data.wildfires || [];
     const droughts = data.drought   || [];
-    const worst    = droughts.length ? droughts.reduce((a, b) => a.intensity >= b.intensity ? a : b) : null;
+    const worst    = droughts.length
+        ? droughts.reduce((a, b) => a.intensity >= b.intensity ? a : b)
+        : null;
     const cr       = data.climateResilience?.[0];
+    const wfScore  = cr?.wildfireRiskToHome ?? 0;
 
-    if (fires.length || (worst && worst.intensity >= 1)) {
-        const parts = [
-            fires.length  && `${fires.length} active wildfire${fires.length > 1 ? "s" : ""} within 50 mi`,
-            worst?.intensity >= 1 && worst.label
-        ].filter(Boolean);
+    // Drought context string appended to value when present
+    const droughtStr = worst?.intensity >= 1
+        ? worst.label                   // e.g. "Moderate Drought (D2)"
+        : "No active drought";
+
+    if (fires.length) {
+        const severity = fires.length >= 3 || worst?.intensity >= 3 ? "high" : "moderate";
         indicators.push({
-            label:    "Wildfire & Drought",
-            severity: fires.length || worst?.intensity >= 3 ? "high" : "moderate",
-            value:    parts.join(" · ")
+            label:    "Wildfire Risk",
+            severity,
+            value:    `${fires.length} active wildfire${fires.length > 1 ? "s" : ""} within 50 mi · ${droughtStr}`
         });
-    } else if (cr?.wildfireRiskToHome > 0) {
-        // Fall back to tract-level wildfire risk score when no active incidents
-        const wfSev = cr.wildfireRiskToHome >= 0.6 ? "high" : cr.wildfireRiskToHome >= 0.3 ? "moderate" : "low";
+    } else if (wfScore > 0) {
+        // No active incidents — use USFS tract-level risk score as the signal
+        const severity = wfScore >= 0.6 ? "high" : wfScore >= 0.3 ? "moderate" : "low";
         indicators.push({
-            label:    "Wildfire & Drought",
-            severity: wfSev,
-            value:    `Wildfire risk score ${cr.wildfireRiskToHome.toFixed(2)} · ${worst?.label || "No active drought"}`
+            label:    "Wildfire Risk",
+            severity,
+            value:    `Risk score ${wfScore.toFixed(2)} (USFS) · ${droughtStr}`
         });
     } else {
-        indicators.push({ label: "Wildfire & Drought", severity: "low", value: "No active wildfires or drought conditions" });
+        // No incidents and no tract score — drought alone at D2+ warrants moderate
+        const severity = worst?.intensity >= 2 ? "moderate" : "low";
+        indicators.push({
+            label:    "Wildfire Risk",
+            severity,
+            value:    `No active wildfires · ${droughtStr}`
+        });
     }
 
-    // ── 5. Climate Resilience (ArcGIS Living Atlas — tract-level) ──────────
+    // ── 5. Social Vulnerability ────────────────────────────────────────────
+    // Renamed from "Climate Resilience" — the data shown is the ArcGIS Living
+    // Atlas population vulnerability index, where a HIGH percentile means a MORE
+    // vulnerable population. The old label implied the opposite.
     if (cr) {
-        // Use the percentile vulnerability index as the primary signal
-        const pctile = cr.vulPopIndexPctile;
+        const pctile   = cr.vulPopIndexPctile ?? 0;
         const severity = pctile >= 75 ? "high" : pctile >= 40 ? "moderate" : "low";
-        const parts = [
-            pctile > 0         && `${pctile.toFixed(0)}th pctile vulnerability`,
-            cr.pctPoverty > 0  && `${cr.pctPoverty.toFixed(1)}% poverty`,
+        const parts    = [
+            pctile > 0           && `${pctile.toFixed(0)}th percentile vulnerability`,
+            cr.pctPoverty > 0    && `${cr.pctPoverty.toFixed(1)}% poverty rate`,
             cr.pctOldHousing > 0 && `${cr.pctOldHousing.toFixed(0)}% pre-1970 housing`
         ].filter(Boolean);
         indicators.push({
-            label:    "Climate Resilience",
+            label:    "Social Vulnerability",
             severity,
-            value:    parts.length ? parts.join(" · ") : "Tract data available — see Climate & Resilience card"
+            value:    parts.length
+                ? parts.join(" · ")
+                : "Tract vulnerability data available — see Climate & Resilience card"
         });
     } else {
-        indicators.push({ label: "Climate Resilience", severity: "unknown", value: "No tract-level data returned" });
+        indicators.push({
+            label:    "Social Vulnerability",
+            severity: "unknown",
+            value:    "No tract-level vulnerability data returned"
+        });
     }
 
-    // ── 6. Community Health (Robert Wood Johnson / County Health Rankings) ──
-    const health = data.countyHealth?.[0];
+    // ── 6. Community Health ────────────────────────────────────────────────
+    // Life expectancy is the primary severity driver (most comprehensive single
+    // health outcome indicator). Uninsured rate replaces unemployment as a
+    // health-specific secondary metric — unemployment is economic, not health.
+    const health    = data.countyHealth?.[0];
+    const uninsured = health?.pctUninsured ?? health?.uninsured ?? null;
+
     if (health) {
-        // Life expectancy: national avg ~77y; flag below 74 as high concern
-        const le   = health.lifeExpectancy;
-        const unemp = data.unemployment?.[0]?.pctUnemployed ?? health.unemployment;
+        const le       = health.lifeExpectancy;
+        // National avg ~77y; below 74 = high concern, 74–77 = moderate
         const severity = le != null
             ? (le < 74 ? "high" : le < 77 ? "moderate" : "low")
             : "unknown";
-        const parts = [
-            le != null    && `Life expectancy ${Number(le).toFixed(1)} yrs`,
-            unemp != null && `${Number(unemp).toFixed(1)}% unemployment`
+        const parts    = [
+            le != null         && `Life expectancy ${Number(le).toFixed(1)} yrs`,
+            uninsured != null  && `${Number(uninsured).toFixed(1)}% uninsured`
         ].filter(Boolean);
         indicators.push({
             label:    "Community Health",
             severity,
-            value:    parts.length ? parts.join(" · ") : `${health.county || "County"} health data available`
+            value:    parts.length
+                ? parts.join(" · ")
+                : `${health.county || "County"} health data available`
         });
     } else {
-        indicators.push({ label: "Community Health", severity: "unknown", value: "County health data unavailable" });
+        indicators.push({
+            label:    "Community Health",
+            severity: "unknown",
+            value:    "County health data unavailable"
+        });
     }
 
     return indicators;

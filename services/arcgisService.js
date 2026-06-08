@@ -99,12 +99,17 @@ const SERVICES = {
         url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_SEMS_NPL/FeatureServer/0",
         radius: 2, queryType: "distance",
         outFields: ["PRIMARY_NAME", "CITY_NAME", "STATE_CODE", "COUNTY_NAME", "FAC_URL", "PGM_REPORT_URL", "ACTIVE_STATUS", "INTEREST_TYPE"],
-        normalize: (features) => normalizeFeatures(features, (a) => ({
-            dataset: "superfundSites", name: a.PRIMARY_NAME || "Unknown Site",
-            city: a.CITY_NAME || "Unknown", county: a.COUNTY_NAME || null, state: a.STATE_CODE || null,
-            activeStatus: a.ACTIVE_STATUS || null, interestType: a.INTEREST_TYPE || null,
-            facilityUrl: a.FAC_URL || null, reportUrl: a.PGM_REPORT_URL || null
-        }))
+    normalize: (features) => normalizeFeatures(features, (a) => ({
+        dataset: "superfundSites", name: a.PRIMARY_NAME || "Unknown Site",
+        city: a.CITY_NAME || "Unknown", county: a.COUNTY_NAME || null, state: a.STATE_CODE || null,
+        activeStatus: a.ACTIVE_STATUS || null, interestType: a.INTEREST_TYPE || null,
+        facilityUrl: a.FAC_URL || (a.REGISTRY_ID
+            ? `https://enviro.epa.gov/envirofacts/facility/overview/${a.REGISTRY_ID}`
+            : null),
+        reportUrl: a.PGM_REPORT_URL || (a.REGISTRY_ID
+            ? `https://echo.epa.gov/detailed-facility-report?fid=${a.REGISTRY_ID}`
+            : null)
+    }))
     },
     brownfields: {
         url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/FRS_INTERESTS_ACRES/FeatureServer/0",
