@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Environmental Context Reporting | Instant Property Reports</title>
+  <title>EcoDisclosure — Environmental Property Reports</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -15,17 +15,15 @@
 <div class="splash-overlay" id="splashOverlay" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
   <div class="splash-modal">
     <div class="splash-header">
-      <div class="splash-logo">
-        <img src="ecr.png" alt="Environmental Context Reporting logo" class="splash-logo-img">
-      </div>
-      <h1 class="splash-title" id="splashTitle">Environmental<em>Context</em>Reporting</h1>
+      <div class="splash-eyebrow">Environmental Due Diligence</div>
+      <h1 class="splash-title" id="splashTitle">Eco<em>Disclosure</em></h1>
       <p class="splash-sub">Instant environmental property reports for any US address.</p>
     </div>
     <div class="splash-body">
       <p class="splash-about">Get live data on flood risk, hazards, contamination, air quality, public health, and more. Drawn from FEMA, EPA, NOAA, USGS, and other federal sources.</p>
       <div class="splash-disclaimer">
         <div class="splash-disclaimer-label">Not a professional assessment</div>
-        <p class="splash-disclaimer-text">Environmental Context Reporting is for informational use only. This is not a Phase I/II ESA, legal opinion, or professional review. Always consult a licensed expert before making real estate or financial decisions.</p>
+        <p class="splash-disclaimer-text">EcoDisclosure is for informational use only. This is not a Phase I/II ESA, legal opinion, or professional review. Always consult a licensed expert before making real estate or financial decisions.</p>
       </div>
       <div class="splash-footer">
         <div class="splash-sources">Sources: FEMA · EPA · NOAA · USGS · ArcGIS · Census · NPS · BLS</div>
@@ -35,14 +33,13 @@
   </div>
 </div>
 
-<!-- Hero -->
-<header class="hero">
-  <div class="hero-content">
-    <div class="hero-left">
-      <h1>Environmental<em> Context </em>Reporting</h1>
-      <p class="hero-description">Live data on flood risk, hazards, contamination, air quality, public health, and more.</p>
-      <div class="hero-cta">
-        <button class="hero-btn" id="heroGetStartedBtn">Get Started</button>
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="hero-brand">
+        <div class="hero-eyebrow">Environmental Due Diligence</div>
+        <h1>Eco<em>Disclosure</em></h1>
+        <p class="hero-sub">Instant environmental reports for properties: flood zones, contaminated sites, pollution sources, community health, environment, and more.</p>
       </div>
       <div class="hero-badges">
         <span class="hero-badge">FEMA Flood Data</span>
@@ -52,18 +49,9 @@
         <span class="hero-badge">ArcGIS Living Atlas</span>
       </div>
     </div>
-    <div class="hero-right">
-      <img src="ecr.png" alt="Environmental Context Reporting logo" class="hero-logo-large">
-    </div>
-  </div>
-</header>
+  </header>
 
-
-
-
-
-
-  <!-- Main -->
+  <!-- ── Main ───────────────────────────────────────────── -->
   <main class="main-container">
 
 <!-- Search -->
@@ -123,7 +111,7 @@
     <div id="loading" class="hidden">
         <div class="loading-spinner"></div>
         <div class="loading-steps">
-            <div class="loading-step" id="loadingPrimary" style="font-weight:600;color:var(--g700)">Generating environmental report...</div>
+            <div class="loading-step" id="loadingPrimary" style="font-weight:600;color:var(--g700)">Generating environmental report…</div>
             <div class="loading-step" id="loadingSecondary">Querying FEMA, EPA, NOAA, Census, and ArcGIS datasets</div>
             <div class="loading-step" id="loadingDatasets" style="font-size:11px;color:var(--i500);margin-top:2px"></div>
         </div>
@@ -168,7 +156,7 @@
       <div class="grid-layout two-column">
         <div class="card">
           <div class="card-header">
-            <h3>Environmental and Social Risk</h3>
+            <h3>Environmental &amp; Social Risk</h3>
             <span class="card-tag">Tract-Level</span>
           </div>
           <div id="elevationContainer" style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--i100)"></div>
@@ -190,7 +178,7 @@
       <!-- Hazards -->
       <div class="card">
         <div class="card-header">
-          <h3>Environmental Hazards and Exposure</h3>
+          <h3>Environmental Hazards &amp; Exposure</h3>
           <span class="card-tag">EPA · FEMA · NOAA</span>
         </div>
         <div id="hazardsContainer">
@@ -201,7 +189,7 @@
       <!-- Parks -->
       <div class="card">
         <div class="card-header">
-          <h3>Parks and Recreation</h3>
+          <h3>Parks &amp; Recreation</h3>
           <span class="card-tag">Within 3 mi</span>
         </div>
         <div id="parksContainer"></div>
@@ -215,15 +203,15 @@
         <div id="datasetsIncluded">
           <ul class="dataset-list">
             <li>FEMA Flood Hazard Layers</li>
-            <li>EPA Superfund and Brownfields</li>
+            <li>EPA Superfund &amp; Brownfields</li>
             <li>EPA Hazardous Waste (RCRA)</li>
             <li>EPA Water Discharge Permits (NPDES)</li>
             <li>NOAA Drought Monitor</li>
             <li>NASA/VIIRS Thermal Hotspots</li>
             <li>USGS Contour Elevation</li>
-            <li>USGS Trails and Waterways</li>
+            <li>USGS Trails &amp; Waterways</li>
             <li>NWI Wetlands</li>
-            <li>NRHP Historic Sites and Districts</li>
+            <li>NRHP Historic Sites &amp; Districts</li>
             <li>ArcGIS Climate Resilience (Census Tracts)</li>
             <li>ArcGIS County Health Rankings 2025</li>
             <li>BLS Monthly Unemployment</li>
@@ -237,16 +225,21 @@
 
     </section><!-- end reportSection -->
 
-    <!-- Dataset Context and Program Information -->
+
+
+
+
+
+    <!-- ── Dataset Context & Program Information ─────────── -->
     <section class="dataset-context-section">
       <div class="section-header">
         <h2 class="section-title">Understanding the Data</h2>
-        <p class="section-sub">Each dataset in an Environmental Context Reporting report comes from a federal or intergovernmental program. Learn what each program tracks, what findings mean, and where to investigate further.</p>
+        <p class="section-sub">Each dataset in an EcoDisclosure report comes from a federal or intergovernmental program. Learn what each program tracks, what findings mean, and where to investigate further.</p>
       </div>
 
-      <!-- Contamination and Hazardous Sites -->
+      <!-- Contamination & Hazardous Sites -->
       <div class="context-group">
-        <div class="context-group-label">Contamination and Hazardous Sites</div>
+        <div class="context-group-label">Contamination &amp; Hazardous Sites</div>
 
         <div class="context-card">
           <button class="context-toggle" aria-expanded="false">
@@ -254,7 +247,7 @@
               <span class="context-severity-dot high"></span>
               <div>
                 <div class="context-name">EPA Superfund (NPL)</div>
-                <div class="context-summary">The nation's most contaminated sites. Legally mandated for cleanup.</div>
+                <div class="context-summary">The nation's most contaminated sites — legally mandated for cleanup</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -271,7 +264,7 @@
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">What proximity means</div>
-                <p>Being within 1 to 2 miles of a listed Superfund site does not automatically mean a property is contaminated. Risk depends on the specific contaminants, groundwater flow direction, soil permeability, and cleanup status. Sites currently under active remediation pose different risks than sites with completed cleanups.</p>
+                <p>Being within 1–2 miles of a listed Superfund site does not automatically mean a property is contaminated. Risk depends on the specific contaminants, groundwater flow direction, soil permeability, and cleanup status. Sites currently under active remediation pose different risks than sites with completed cleanups.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Health implications</div>
@@ -292,7 +285,7 @@
               <span class="context-severity-dot moderate"></span>
               <div>
                 <div class="context-name">EPA Brownfields (ACRES)</div>
-                <div class="context-summary">Previously used industrial and commercial properties with potential contamination.</div>
+                <div class="context-summary">Previously used industrial and commercial properties with potential contamination</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -301,7 +294,7 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>Brownfields are real property where the presence or potential presence of a hazardous substance, pollutant, or contaminant complicates expansion, redevelopment, or reuse. The EPA's Assessment, Cleanup, and Redevelopment Exchange System (ACRES) tracks sites receiving federal brownfield grants and assessments. These are generally less severe than Superfund sites. Many are former gas stations, dry cleaners, industrial parcels, or commercial properties.</p>
+                <p>Brownfields are real property where the presence or potential presence of a hazardous substance, pollutant, or contaminant complicates expansion, redevelopment, or reuse. The EPA's Assessment, Cleanup, and Redevelopment Exchange System (ACRES) tracks sites receiving federal brownfield grants and assessments. These are generally less severe than Superfund sites — many are former gas stations, dry cleaners, industrial parcels, or commercial properties.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Typical contaminants</div>
@@ -329,7 +322,7 @@
               <span class="context-severity-dot high"></span>
               <div>
                 <div class="context-name">EPA Hazardous Waste (RCRA)</div>
-                <div class="context-summary">Active facilities generating, treating, storing, or disposing of hazardous waste.</div>
+                <div class="context-summary">Active facilities generating, treating, storing, or disposing of hazardous waste</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -367,7 +360,7 @@
               <span class="context-severity-dot moderate"></span>
               <div>
                 <div class="context-name">EPA Water Discharge Permits (NPDES)</div>
-                <div class="context-summary">Facilities legally permitted to discharge pollutants into waterways.</div>
+                <div class="context-summary">Facilities legally permitted to discharge pollutants into waterways</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -380,7 +373,7 @@
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Common dischargers</div>
-                <p>Municipal sewage treatment plants (which discharge treated effluent legally), industrial facilities (paper mills, chemical plants, food processors), power plants (thermal discharge), and stormwater systems. Having a permit does not mean a facility is polluting. It means discharge is regulated and monitored.</p>
+                <p>Municipal sewage treatment plants (which discharge treated effluent legally), industrial facilities (paper mills, chemical plants, food processors), power plants (thermal discharge), and stormwater systems. Having a permit does not mean a facility is polluting — it means discharge is regulated and monitored.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">What to look for</div>
@@ -388,7 +381,7 @@
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Downstream risk</div>
-                <p>Properties near permitted discharge points on rivers or streams may be downstream of regulated but potentially impactful discharges. Combined sewer overflows (CSOs), where stormwater and sewage mix during heavy rain, are a particular concern in older urban areas.</p>
+                <p>Properties near permitted discharge points on rivers or streams may be downstream of regulated but potentially impactful discharges. Combined sewer overflows (CSOs) — where stormwater and sewage mix during heavy rain — are a particular concern in older urban areas.</p>
               </div>
             </div>
             <div class="context-links">
@@ -399,9 +392,9 @@
         </div>
       </div>
 
-      <!-- Flood and Climate Risk -->
+      <!-- Flood & Climate Risk -->
       <div class="context-group">
-        <div class="context-group-label">Flood and Climate Risk</div>
+        <div class="context-group-label">Flood &amp; Climate Risk</div>
 
         <div class="context-card">
           <button class="context-toggle" aria-expanded="false">
@@ -409,7 +402,7 @@
               <span class="context-severity-dot high"></span>
               <div>
                 <div class="context-name">FEMA Flood Hazard Layers (NFHL)</div>
-                <div class="context-summary">Official federal flood zone designations used for insurance and development.</div>
+                <div class="context-summary">Official federal flood zone designations used for insurance and development</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -422,20 +415,21 @@
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Zone designations explained</div>
-                <p><strong>Zone AE:</strong> High risk. 1% annual chance of flooding (100-year flood). Flood insurance required for federally backed mortgages. <strong>Zone A:</strong> High risk but no detailed analysis. <strong>Zone AO/AH:</strong> High risk with shallow flooding. <strong>Zone VE:</strong> Coastal high risk with wave action. Highest hazard. <strong>Zone X (shaded):</strong> Moderate risk. 0.2% annual chance (500-year flood). <strong>Floodway:</strong> The channel and adjacent land that must remain open to carry floodwaters. The highest-restriction zone.</p>
+                <p><strong>Zone AE:</strong> High risk — 1% annual chance of flooding (100-year flood). Flood insurance required for federally backed mortgages. <strong>Zone A:</strong> High risk but no detailed analysis. <strong>Zone AO/AH:</strong> High risk with shallow flooding. <strong>Zone VE:</strong> Coastal high risk with wave action — highest hazard. <strong>Zone X (shaded):</strong> Moderate risk — 0.2% annual chance (500-year flood). <strong>Floodway:</strong> The channel and adjacent land that must remain open to carry floodwaters — the highest-restriction zone.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Insurance implications</div>
-                <p>Properties in high-risk zones (A or V designations) with federally backed mortgages are required to carry flood insurance through the National Flood Insurance Program (NFIP). Annual premiums in AE zones typically range from $700 to $3,000+ depending on elevation, structure type, and coverage amount. Properties in Zone X are not required to carry flood insurance but can still flood.</p>
+                <p>Properties in high-risk zones (A or V designations) with federally backed mortgages are required to carry flood insurance through the National Flood Insurance Program (NFIP). Annual premiums in AE zones typically range from $700–$3,000+ depending on elevation, structure type, and coverage amount. Properties in Zone X are not required to carry flood insurance but can still flood.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Limitations</div>
-                <p>FEMA maps are often outdated. Many were last updated 10 to 20 years ago and do not account for climate-driven changes in precipitation or sea level rise. Properties just outside high-risk zones can still flood. Third-party tools like First Street Foundation's Flood Factor provide more current risk assessments.</p>
+                <p>FEMA maps are often outdated — many were last updated 10–20 years ago and do not account for climate-driven changes in precipitation or sea level rise. Properties just outside high-risk zones can still flood. Third-party tools like First Street Foundation's Flood Factor provide more current risk assessments.</p>
               </div>
             </div>
             <div class="context-links">
              <a href="https://www.fema.gov/flood-maps" target="_blank" rel="noopener">FEMA Flood Map Service ↗</a>
               <a href="https://msc.fema.gov/portal/home" target="_blank" rel="noopener">Map Service Center ↗</a>
+
             </div>
           </div>
         </div>
@@ -446,7 +440,7 @@
               <span class="context-severity-dot moderate"></span>
               <div>
                 <div class="context-name">US Drought Monitor</div>
-                <div class="context-summary">Weekly composite drought conditions from NOAA, USDA, and NDMC.</div>
+                <div class="context-summary">Weekly composite drought conditions from NOAA, USDA, and NDMC</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -455,11 +449,11 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>The US Drought Monitor is a weekly map produced jointly by NOAA, the USDA, and the National Drought Mitigation Center (NDMC) at the University of Nebraska-Lincoln. It synthesizes dozens of drought indicators, including precipitation, streamflow, soil moisture, temperature, and expert input, into five intensity categories (D0 to D4) covering the contiguous United States.</p>
+                <p>The US Drought Monitor is a weekly map produced jointly by NOAA, the USDA, and the National Drought Mitigation Center (NDMC) at the University of Nebraska-Lincoln. It synthesizes dozens of drought indicators — precipitation, streamflow, soil moisture, temperature, and expert input — into five intensity categories (D0–D4) covering the contiguous United States.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Intensity categories</div>
-                <p><strong>D0. Abnormally Dry:</strong> Short-term dryness, possible fire risk. <strong>D1. Moderate Drought:</strong> Some crop damage, water shortages begin. <strong>D2. Severe Drought:</strong> Crop and pasture losses, water restrictions likely. <strong>D3. Extreme Drought:</strong> Major crop losses, widespread water shortages, emergency declarations. <strong>D4. Exceptional Drought:</strong> Exceptional and widespread crop and pasture losses, water emergencies.</p>
+                <p><strong>D0 — Abnormally Dry:</strong> Short-term dryness, possible fire risk. <strong>D1 — Moderate Drought:</strong> Some crop damage, water shortages begin. <strong>D2 — Severe Drought:</strong> Crop and pasture losses, water restrictions likely. <strong>D3 — Extreme Drought:</strong> Major crop losses, widespread water shortages, emergency declarations. <strong>D4 — Exceptional Drought:</strong> Exceptional and widespread crop/pasture losses, water emergencies.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Property relevance</div>
@@ -479,7 +473,7 @@
               <span class="context-severity-dot low"></span>
               <div>
                 <div class="context-name">ArcGIS Climate Resilience (Census Tract)</div>
-                <div class="context-summary">Tract-level climate vulnerability, wildfire risk, flood projections, and intervention indices.</div>
+                <div class="context-summary">Tract-level climate vulnerability, wildfire risk, flood projections, and intervention indices</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -488,15 +482,15 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>The ArcGIS Living Atlas Climate Resilience Planning layer aggregates dozens of census tract level indicators covering population vulnerability, climate exposure, and resilience capacity. Data comes from the Census Bureau's American Community Survey, EPA air quality monitoring, NOAA land surface temperature satellite imagery, the USFS tree canopy dataset, and First Street Foundation flood models.</p>
+                <p>The ArcGIS Living Atlas Climate Resilience Planning layer aggregates dozens of census tract–level indicators covering population vulnerability, climate exposure, and resilience capacity. Data comes from the Census Bureau's American Community Survey, EPA air quality monitoring, NOAA land surface temperature satellite imagery, the USFS tree canopy dataset, and First Street Foundation flood models.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Key indicators</div>
-                <p><strong>Population Vulnerability Index:</strong> Composite of poverty rate, minority population percentage, elderly population, disability status, and other social vulnerability factors. Normalized to a national percentile. <strong>Wildfire Risk to Homes:</strong> Average risk score for residential structures in the tract from the USFS Wildfire Risk to Communities dataset. <strong>Projected Flood Risk:</strong> Percentage of properties in the tract with flood risk today versus in 30 years under current climate projections (First Street Foundation). <strong>Summer Heat (LST):</strong> Mean land surface temperature in summer from NOAA satellite data. An urban heat island indicator.</p>
+                <p><strong>Population Vulnerability Index:</strong> Composite of poverty rate, minority population percentage, elderly population, disability status, and other social vulnerability factors — normalized to a national percentile. <strong>Wildfire Risk to Homes:</strong> Average risk score for residential structures in the tract from the USFS Wildfire Risk to Communities dataset. <strong>Projected Flood Risk:</strong> Percentage of properties in the tract with flood risk today vs. in 30 years under current climate projections (First Street Foundation). <strong>Summer Heat (LST):</strong> Mean land surface temperature in summer from NOAA satellite data — urban heat island indicator.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Intervention indices</div>
-                <p>The layer includes priority indices for climate interventions, including tree planting, home hardening, cooling centers, and flood awareness. These are ranked at national, state, and county percentiles. High percentile scores indicate tracts where these interventions are most urgently needed based on vulnerability and exposure.</p>
+                <p>The layer includes priority indices for climate interventions — tree planting, home hardening, cooling centers, flood awareness — ranked at national, state, and county percentiles. High percentile scores indicate tracts where these interventions are most urgently needed based on vulnerability and exposure.</p>
               </div>
             </div>
             <div class="context-links">
@@ -507,9 +501,9 @@
         </div>
       </div>
 
-      <!-- Air Quality and Environment -->
+      <!-- Air Quality & Environment -->
       <div class="context-group">
-        <div class="context-group-label">Air Quality and Environment</div>
+        <div class="context-group-label">Air Quality &amp; Environment</div>
 
         <div class="context-card">
           <button class="context-toggle" aria-expanded="false">
@@ -517,7 +511,7 @@
               <span class="context-severity-dot moderate"></span>
               <div>
                 <div class="context-name">Air Quality Monitors (PM2.5)</div>
-                <div class="context-summary">Fine particulate matter readings from EPA and partner monitoring networks.</div>
+                <div class="context-summary">Fine particulate matter readings from EPA and partner monitoring networks</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -526,7 +520,7 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>PM2.5 refers to fine inhalable particles with diameters of 2.5 micrometers or smaller, about 30 times smaller than a human hair. These particles come from combustion (vehicle exhaust, power plants, wood burning, wildfires), industrial processes, and secondary formation from atmospheric reactions. Readings shown in reports come from EPA's AirNow network of regulatory monitors and low-cost sensor networks.</p>
+                <p>PM2.5 refers to fine inhalable particles with diameters of 2.5 micrometers or smaller — about 30 times smaller than a human hair. These particles come from combustion (vehicle exhaust, power plants, wood burning, wildfires), industrial processes, and secondary formation from atmospheric reactions. Readings shown in reports come from EPA's AirNow network of regulatory monitors and low-cost sensor networks.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Health effects</div>
@@ -534,15 +528,15 @@
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">AQI categories (PM2.5 µg/m³)</div>
-                <p><strong>0 to 12 µg/m³. Good:</strong> Air quality is satisfactory. <strong>12.1 to 35.4. Moderate:</strong> Some pollutants may concern very sensitive individuals. <strong>35.5 to 55.4. Unhealthy for Sensitive Groups:</strong> Elderly, children, those with heart or lung conditions. <strong>55.5 to 150.4. Unhealthy:</strong> Everyone may experience health effects. <strong>150.5+. Very Unhealthy or Hazardous:</strong> Health warnings and emergency conditions.</p>
+                <p><strong>0–12 µg/m³ — Good:</strong> Air quality is satisfactory. <strong>12.1–35.4 — Moderate:</strong> Some pollutants may concern very sensitive individuals. <strong>35.5–55.4 — Unhealthy for Sensitive Groups:</strong> Elderly, children, those with heart/lung conditions. <strong>55.5–150.4 — Unhealthy:</strong> Everyone may experience health effects. <strong>150.5+ — Very Unhealthy / Hazardous:</strong> Health warnings and emergency conditions.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Context for reports</div>
-                <p>Monitor readings reflect current or recent air quality at the nearest station, which may be several miles away. Local conditions, including proximity to highways, industrial facilities, and wood stoves, can make actual exposure significantly higher than the nearest monitor suggests. Annual mean PM2.5 exposure (from the Climate Resilience layer) is a better indicator of long-term exposure than current readings.</p>
+                <p>Monitor readings reflect current or recent air quality at the nearest station, which may be several miles away. Local conditions — proximity to highways, industrial facilities, wood stoves — can make actual exposure significantly higher than the nearest monitor suggests. Annual mean PM2.5 exposure (from the Climate Resilience layer) is a better indicator of long-term exposure than current readings.</p>
               </div>
             </div>
             <div class="context-links">
-              <a href="https://www.airnow.gov/" target="_blank" rel="noopener">AirNow. Current Air Quality ↗</a>
+              <a href="https://www.airnow.gov/" target="_blank" rel="noopener">AirNow — Current Air Quality ↗</a>
               <a href="https://www.epa.gov/pm-pollution" target="_blank" rel="noopener">EPA PM2.5 Health Information ↗</a>
               <a href="https://www.airnow.gov/aqi/" target="_blank" rel="noopener">Air Quality Index Guide ↗</a>
             </div>
@@ -555,7 +549,7 @@
               <span class="context-severity-dot low"></span>
               <div>
                 <div class="context-name">NWI Wetlands</div>
-                <div class="context-summary">National Wetlands Inventory. Classified wetland ecosystems with ecological and regulatory significance.</div>
+                <div class="context-summary">National Wetlands Inventory. Classified wetland ecosystems with ecological and regulatory significance</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -564,7 +558,7 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>The National Wetlands Inventory (NWI), produced by the US Fish and Wildlife Service, is the most comprehensive wetlands mapping effort in the United States. It classifies wetlands and deepwater habitats by system (Marine, Estuarine, Riverine, Lacustrine, Palustrine), subsystem, class, and water regime. Environmental Context Reporting queries the most recent NWI dataset hosted by ESRI's ArcGIS Living Atlas.</p>
+                <p>The National Wetlands Inventory (NWI), produced by the US Fish &amp; Wildlife Service, is the most comprehensive wetlands mapping effort in the United States. It classifies wetlands and deepwater habitats by system (Marine, Estuarine, Riverine, Lacustrine, Palustrine), subsystem, class, and water regime. EcoDisclosure queries the most recent NWI dataset hosted by ESRI's ArcGIS Living Atlas.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Ecological functions</div>
@@ -588,9 +582,9 @@
         </div>
       </div>
 
-      <!-- Community and Public Health -->
+      <!-- Community & Public Health -->
       <div class="context-group">
-        <div class="context-group-label">Community and Public Health</div>
+        <div class="context-group-label">Community &amp; Public Health</div>
 
         <div class="context-card">
           <button class="context-toggle" aria-expanded="false">
@@ -598,7 +592,7 @@
               <span class="context-severity-dot low"></span>
               <div>
                 <div class="context-name">County Health Rankings (Robert Wood Johnson Foundation)</div>
-                <div class="context-summary">Annual county-level health outcomes and social determinants across the US.</div>
+                <div class="context-summary">Annual county-level health outcomes and social determinants across the US</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -607,15 +601,15 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>The County Health Rankings and Roadmaps program, a collaboration between the Robert Wood Johnson Foundation and the University of Wisconsin Population Health Institute, ranks counties within each state on over 50 health outcomes and factors. Data comes from the CDC WONDER database, Census Bureau, Bureau of Labor Statistics, and other federal sources. Rankings are updated annually and reflect multi-year averages for statistical stability.</p>
+                <p>The County Health Rankings &amp; Roadmaps program, a collaboration between the Robert Wood Johnson Foundation and the University of Wisconsin Population Health Institute, ranks counties within each state on over 50 health outcomes and factors. Data comes from the CDC WONDER database, Census Bureau, Bureau of Labor Statistics, and other federal sources. Rankings are updated annually and reflect multi-year averages for statistical stability.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Key metrics explained</div>
-                <p><strong>Life expectancy:</strong> Average years of life at birth. The single most comprehensive health outcome indicator. <strong>Uninsured rate:</strong> Percentage of adults under 65 without health insurance. <strong>Drug overdose rate:</strong> Age-adjusted deaths per 100,000 from drug overdoses. A proxy for substance use disorder and healthcare access gaps. <strong>Food insecurity:</strong> Percentage of the population with limited access to adequate nutrition. <strong>Park access:</strong> Percentage of residents living within a half mile of a park. A measure of active living opportunities.</p>
+                <p><strong>Life expectancy:</strong> Average years of life at birth — the single most comprehensive health outcome indicator. <strong>Uninsured rate:</strong> Percentage of adults under 65 without health insurance. <strong>Drug overdose rate:</strong> Age-adjusted deaths per 100,000 from drug overdoses — a proxy for substance use disorder and healthcare access gaps. <strong>Food insecurity:</strong> Percentage of the population with limited access to adequate nutrition. <strong>Park access:</strong> Percentage of residents living within a half mile of a park — a measure of active living opportunities.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Environmental justice connection</div>
-                <p>County health metrics are strongly correlated with environmental exposures. Counties with higher rates of industrial pollution tend to have higher rates of asthma, cardiovascular disease, and premature death. The relationship between environmental burden and health outcomes is the foundation of the environmental justice movement. Communities of color and low-income communities bear disproportionate environmental health burdens.</p>
+                <p>County health metrics are strongly correlated with environmental exposures. Counties with higher rates of industrial pollution tend to have higher rates of asthma, cardiovascular disease, and premature death. The relationship between environmental burden and health outcomes is the foundation of the environmental justice movement — communities of color and low-income communities bear disproportionate environmental health burdens.</p>
               </div>
             </div>
             <div class="context-links">
@@ -630,8 +624,8 @@
             <div class="context-toggle-left">
               <span class="context-severity-dot low"></span>
               <div>
-                <div class="context-name">NRHP Historic Sites and Districts</div>
-                <div class="context-summary">National Register of Historic Places. Federally recognized properties with historical, architectural, or cultural significance.</div>
+                <div class="context-name">NRHP Historic Sites &amp; Districts</div>
+                <div class="context-summary">National Register of Historic Places. Federally recognized properties with historical, architectural, or cultural significance</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -640,15 +634,15 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>The National Register of Historic Places (NRHP) is the United States' official list of districts, sites, buildings, structures, and objects deemed worthy of preservation for their historical, architectural, archaeological, and cultural significance. Maintained by the National Park Service, the NRHP currently includes over 100,000 properties across all 50 states. Environmental Context Reporting queries both point locations (individual structures) and polygon boundaries (historic districts) from the NPS mapping service.</p>
+                <p>The National Register of Historic Places (NRHP) is the United States' official list of districts, sites, buildings, structures, and objects deemed worthy of preservation for their historical, architectural, archaeological, and cultural significance. Maintained by the National Park Service, the NRHP currently includes over 100,000 properties across all 50 states. EcoDisclosure queries both point locations (individual structures) and polygon boundaries (historic districts) from the NPS mapping service.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Designation types</div>
-                <p><strong>Individual properties:</strong> Specific buildings, structures, or sites listed for their own merit. <strong>Historic districts:</strong> Defined geographic areas where a concentration of historically significant properties creates a cohesive district, often entire neighborhoods. <strong>National Historic Landmarks (NHL):</strong> A subset of NRHP properties of exceptional national significance, designated by the Secretary of the Interior.</p>
+                <p><strong>Individual properties:</strong> Specific buildings, structures, or sites listed for their own merit. <strong>Historic districts:</strong> Defined geographic areas where a concentration of historically significant properties creates a cohesive district — often entire neighborhoods. <strong>National Historic Landmarks (NHL):</strong> A subset of NRHP properties of exceptional national significance, designated by the Secretary of the Interior.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Property implications</div>
-                <p>NRHP listing does not restrict what a private property owner can do with their property. It is not a preservation easement. However, listing within a historic district or adjacent to a landmark may create local regulatory constraints through local historic preservation ordinances (HPOs). Federal undertakings affecting listed properties trigger Section 106 review. Listing can also qualify properties for federal historic tax credits (20% of qualified rehabilitation expenses), which is significant for renovation projects.</p>
+                <p>NRHP listing does not restrict what a private property owner can do with their property. It is not a preservation easement. However, listing within a historic district or adjacent to a landmark may create local regulatory constraints through local historic preservation ordinances (HPOs). Federal undertakings affecting listed properties trigger Section 106 review. Listing can also qualify properties for federal historic tax credits (20% of qualified rehabilitation expenses) — significant for renovation projects.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Context for homebuyers</div>
@@ -664,9 +658,9 @@
         </div>
       </div>
 
-      <!-- Terrain and Natural Features -->
+      <!-- Terrain & Natural Features -->
       <div class="context-group">
-        <div class="context-group-label">Terrain and Natural Features</div>
+        <div class="context-group-label">Terrain &amp; Natural Features</div>
 
         <div class="context-card">
           <button class="context-toggle" aria-expanded="false">
@@ -674,7 +668,7 @@
               <span class="context-severity-dot low"></span>
               <div>
                 <div class="context-name">USGS Contour Elevation</div>
-                <div class="context-summary">3DEP-derived contour lines showing ground elevation above sea level.</div>
+                <div class="context-summary">3DEP-derived contour lines showing ground elevation above sea level</div>
               </div>
             </div>
             <span class="context-chevron">▼</span>
@@ -683,15 +677,15 @@
             <div class="context-grid">
               <div class="context-detail">
                 <div class="context-detail-label">What it tracks</div>
-                <p>Environmental Context Reporting queries the USGS National Map contour service, which provides contour lines derived from the 3D Elevation Program (3DEP), the most comprehensive and accurate elevation dataset ever produced for the United States. 3DEP uses airborne lidar technology to capture elevation with resolutions as fine as 1 meter in many areas.</p>
+                <p>EcoDisclosure queries the USGS National Map contour service, which provides contour lines derived from the 3D Elevation Program (3DEP), the most comprehensive and accurate elevation dataset ever produced for the United States. 3DEP uses airborne lidar technology to capture elevation with resolutions as fine as 1 meter in many areas.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Why elevation matters</div>
-                <p>A property's elevation relative to surrounding terrain is one of the most important factors in flood risk assessment. Properties at higher elevations relative to nearby waterways, drainage channels, and floodplains have inherently lower flood exposure. Elevation also affects drainage. Properties in topographic low points (swales, depressions) collect runoff from surrounding areas. Base Flood Elevation (BFE), the elevation at which there is a 1% annual chance of flooding, is used to determine flood insurance rates.</p>
+                <p>A property's elevation relative to surrounding terrain is one of the most important factors in flood risk assessment. Properties at higher elevations relative to nearby waterways, drainage channels, and floodplains have inherently lower flood exposure. Elevation also affects drainage — properties in topographic low points (swales, depressions) collect runoff from surrounding areas. Base Flood Elevation (BFE) — the elevation at which there is a 1% annual chance of flooding — is used to determine flood insurance rates.</p>
               </div>
               <div class="context-detail">
                 <div class="context-detail-label">Contour intervals</div>
-                <p>Contour lines connect points of equal elevation. The contour interval (shown in the report) is the vertical distance between adjacent contour lines. Tighter lines mean steeper terrain. Widely spaced lines mean gentle slopes. In flat areas like coastal plains and river deltas, a 2-foot elevation difference can mean the difference between being in and out of a Special Flood Hazard Area.</p>
+                <p>Contour lines connect points of equal elevation. The contour interval (shown in the report) is the vertical distance between adjacent contour lines — tighter lines mean steeper terrain, widely spaced lines mean gentle slopes. In flat areas like coastal plains and river deltas, a 2-foot elevation difference can mean the difference between being in and out of a Special Flood Hazard Area.</p>
               </div>
             </div>
             <div class="context-links">
@@ -702,24 +696,25 @@
         </div>
       </div>
 
+
+
+
+
+
       <!-- Disclaimer -->
       <div class="context-disclaimer">
-        <strong>Data Disclaimer:</strong> Environmental Context Reporting reports are for informational purposes only and do not constitute a professional environmental assessment, Phase I or Phase II Environmental Site Assessment (ESA), legal advice, or engineering opinion. Data is sourced from third-party government databases and may be incomplete, outdated, or subject to revision. Always consult licensed environmental professionals, attorneys, and local authorities before making real estate decisions based on this report.
+        <strong>Data Disclaimer:</strong> EcoDisclosure reports are for informational purposes only and do not constitute a professional environmental assessment, Phase I or Phase II Environmental Site Assessment (ESA), legal advice, or engineering opinion. Data is sourced from third-party government databases and may be incomplete, outdated, or subject to revision. Always consult licensed environmental professionals, attorneys, and local authorities before making real estate decisions based on this report.
       </div>
 
     </section><!-- end dataset-context-section -->
 
   </main>
 
-  <!-- Footer -->
+  <!-- ── Footer ─────────────────────────────────────────── -->
   <footer class="footer">
-    <div class="footer-logo">
-      <img src="ecr.png" alt="Environmental Context Reporting logo" class="footer-logo-img">
-    </div>
-    <div class="footer-name">Environmental Context Reporting</div>
+    <div class="footer-name">EcoDisclosure</div>
     <div>© 2026 — Environmental property information for informed decisions.</div>
     <div class="footer-small">Powered by ArcGIS Living Atlas · FEMA · EPA · NOAA · USGS · NPS · BLS · Census</div>
-    <div class="footer-small">Contact: ecreporting@proton.me | ecreporting.com</div>
   </footer>
 
   <script src="services.js"></script>

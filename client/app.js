@@ -966,18 +966,6 @@ function exportToPDF() {
 }
 
 
-// Hero Get Started button
-const heroGetStartedBtn = document.getElementById('heroGetStartedBtn');
-if (heroGetStartedBtn) {
-  heroGetStartedBtn.addEventListener('click', () => {
-    const searchCard = document.querySelector('.search-card');
-    if (searchCard) {
-      searchCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-}
-
-
 
 // ======================================================
 // PIN MODE
@@ -1017,26 +1005,9 @@ function activatePinMode() {
     if (!pinMap) {
         // Default view — center of US; will update if geolocation available
         pinMap = L.map("pinMap", { zoomControl: true }).setView([39.5, -98.35], 4);
-
-        // OPTION 1: CartoDB Voyager (recommended — no referrer issues, clean)
-        // L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-        //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        //     subdomains: "abcd",
-        //     maxZoom: 19
-        // }).addTo(pinMap);
-
-        // OPTION 2: OpenStreetMap with referrer fix (uncomment to use instead)
-        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            attribution: "&copy; OpenStreetMap contributors",
-            referrerPolicy: "strict-origin-when-cross-origin"
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors"
         }).addTo(pinMap);
-
-        // OPTION 3: OpenTopoMap for terrain focus (uncomment to use instead)
-        // L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
-        //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> | &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
-        //     maxZoom: 17
-        // }).addTo(pinMap);
 
         // Try to center on user location
         if (navigator.geolocation) {
@@ -1083,7 +1054,7 @@ function placePinMarker(lat, lng) {
     pinMarker = L.marker([lat, lng], {
         icon: L.divIcon({
             className: "",
-            html: `<div style="width:14px;height:14px;border-radius:50%;background:var(--green-800);border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35)"></div>`,
+            html: `<div style="width:14px;height:14px;border-radius:50%;background:var(--g800);border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35)"></div>`,
             iconSize: [14, 14],
             iconAnchor: [7, 7]
         })
@@ -1093,50 +1064,15 @@ function placePinMarker(lat, lng) {
     pinCoordsEl.textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 
     // Reverse geocode for a human-readable label
-    // Using a more reliable endpoint with better error handling
-    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&limit=1`, {
-        headers: {
-            'Accept': 'application/json',
-            'User-Agent': 'EnvironmentalContextReporting/1.0'
-        }
-    })
-        .then(response => {
-            if (!response.ok) throw new Error('Geocoding failed');
-            return response.json();
-        })
-        .then(data => {
-            if (data && data.display_name) {
-                pinnedLocation.label = data.display_name;
-                // Show shorter preview in pin coordinates
-                const shortAddress = data.display_name.split(",").slice(0, 3).join(",");
-                pinCoordsEl.textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)} — ${shortAddress}`;
+    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+        .then(r => r.json())
+        .then(d => {
+            if (d.display_name) {
+                pinnedLocation.label = d.display_name;
+                pinCoordsEl.textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)} — ${d.display_name.split(",").slice(0,3).join(",")}`;
             }
         })
-        .catch(err => {
-            console.warn('Reverse geocoding error:', err);
-            // Keep coordinates only, no address fallback needed
-        });
-}
-
-// Optional: Function to get the current pin location for report generation
-function getPinnedLocation() {
-    return pinnedLocation;
-}
-
-// Optional: Function to clear the pin and reset the map
-function clearPin() {
-    if (pinMarker) {
-        pinMap.removeLayer(pinMarker);
-        pinMarker = null;
-    }
-    pinnedLocation = null;
-    pinCoordsEl.textContent = "";
-    if (!pinMode) {
-        pinMapWrap.classList.add("hidden");
-        addressInput.placeholder = "search address";
-    } else {
-        addressInput.placeholder = "search address";
-    }
+        .catch(() => {});
 }
 
 
