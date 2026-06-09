@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoDisclosure — Environmental Property Reports</title>
+  <title>Environmental Context Reporting</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -15,15 +15,17 @@
 <div class="splash-overlay" id="splashOverlay" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
   <div class="splash-modal">
     <div class="splash-header">
-      <div class="splash-eyebrow">Environmental Due Diligence</div>
-      <h1 class="splash-title" id="splashTitle">Eco<em>Disclosure</em></h1>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="ecr.png" alt="Environmental Context Reporting Logo" style="height: 48px; width: auto; filter: brightness(0) invert(1);">
+        <h1 class="splash-title" id="splashTitle" style="margin: 0;">Environmental<em> Context </em> Reporting</h1>
+      </div>
       <p class="splash-sub">Instant environmental property reports for any US address.</p>
     </div>
     <div class="splash-body">
       <p class="splash-about">Get live data on flood risk, hazards, contamination, air quality, public health, and more. Drawn from FEMA, EPA, NOAA, USGS, and other federal sources.</p>
       <div class="splash-disclaimer">
         <div class="splash-disclaimer-label">Not a professional assessment</div>
-        <p class="splash-disclaimer-text">EcoDisclosure is for informational use only. This is not a Phase I/II ESA, legal opinion, or professional review. Always consult a licensed expert before making real estate or financial decisions.</p>
+        <p class="splash-disclaimer-text">Environmental Context Reporting is for informational use only. This is not a Phase I/II ESA, legal opinion, or professional review. Always consult a licensed expert before making real estate or financial decisions.</p>
       </div>
       <div class="splash-footer">
         <div class="splash-sources">Sources: FEMA · EPA · NOAA · USGS · ArcGIS · Census · NPS · BLS</div>
@@ -34,22 +36,33 @@
 </div>
 
   <!-- ── Hero ───────────────────────────────────────────── -->
-  <header class="hero">
-    <div class="hero-content">
-      <div class="hero-brand">
-        <div class="hero-eyebrow">Environmental Due Diligence</div>
-        <h1>Eco<em>Disclosure</em></h1>
-        <p class="hero-sub">Instant environmental reports for properties: flood zones, contaminated sites, pollution sources, community health, environment, and more.</p>
-      </div>
-      <div class="hero-badges">
-        <span class="hero-badge">FEMA Flood Data</span>
-        <span class="hero-badge">EPA Superfund</span>
-        <span class="hero-badge">NOAA Climate</span>
-        <span class="hero-badge">Census Demographics</span>
-        <span class="hero-badge">ArcGIS Living Atlas</span>
-      </div>
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-brand">
+      <div class="hero-sub">Instant Environmental Reports</div>
+      <h1>Environmental<em> Context </em> Reporting</h1>
+      <p class="hero-sub">Generate a report for any US address to analyze nearby flood zones, contaminated sites, pollution sources, community health and more.</p>
     </div>
-  </header>
+    <div class="hero-logo">
+      <img src="ecr.png" alt="Environmental Context Reporting Logo" style="height: 230px; width: auto; max-width: 280px;">
+    </div>
+  </div>
+<div class="hero-badges">
+  <span class="hero-badge">Flood Zones</span>
+  <span class="hero-badge">Pollution</span>
+  <span class="hero-badge">Wildfire</span>
+  <span class="hero-badge">Air Quality</span>
+  <span class="hero-badge">Terrain</span>
+  <span class="hero-badge">Wetlands</span>
+  <span class="hero-badge">Historic</span>
+  <span class="hero-badge">Health</span>
+  <span class="hero-badge">Demographics</span>
+  <span class="hero-badge">Climate</span>
+  <span class="hero-badge">Parks</span>
+  <span class="hero-badge">Trails</span>
+
+</div>
+</header>
 
   <!-- ── Main ───────────────────────────────────────────── -->
   <main class="main-container">
@@ -78,7 +91,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
             </svg>
-            <input type="text" id="addressInput" placeholder="e.g. 123 Main St, Chicago, IL">
+            <input type="text" id="addressInput" placeholder="search address">
             <div class="input-error-msg" id="addressError">Please enter an address or drop a pin.</div>
         </div>
 
@@ -234,7 +247,7 @@
     <section class="dataset-context-section">
       <div class="section-header">
         <h2 class="section-title">Understanding the Data</h2>
-        <p class="section-sub">Each dataset in an EcoDisclosure report comes from a federal or intergovernmental program. Learn what each program tracks, what findings mean, and where to investigate further.</p>
+        <p class="section-sub">Each dataset in an Environmental Context Reporting report comes from a federal or intergovernmental program. Learn what each program tracks, what findings mean, and where to investigate further.</p>
       </div>
 
       <!-- Contamination & Hazardous Sites -->
@@ -703,19 +716,44 @@
 
       <!-- Disclaimer -->
       <div class="context-disclaimer">
-        <strong>Data Disclaimer:</strong> EcoDisclosure reports are for informational purposes only and do not constitute a professional environmental assessment, Phase I or Phase II Environmental Site Assessment (ESA), legal advice, or engineering opinion. Data is sourced from third-party government databases and may be incomplete, outdated, or subject to revision. Always consult licensed environmental professionals, attorneys, and local authorities before making real estate decisions based on this report.
+        <strong>Data Disclaimer:</strong> ECR reports are for informational purposes only and do not constitute a professional environmental assessment, Phase I or Phase II Environmental Site Assessment (ESA), legal advice, or engineering opinion. Data is sourced from third-party government databases and may be incomplete, outdated, or subject to revision. Always consult licensed environmental professionals, attorneys, and local authorities before making real estate decisions based on this report.
       </div>
 
     </section><!-- end dataset-context-section -->
 
   </main>
 
+
+<!-- ── Contact & Custom Solutions ─────────────────────── -->
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <div class="contact-header">
+      <h2 class="contact-title">Contact Us</h2>
+      <p class="contact-sub">Interested in a custom application or solution? Get in touch with our team.</p>
+    </div>
+
+    <div class="contact-bar">
+      <div class="contact-bar-left">
+        <div class="contact-bar-label">Get in touch</div>
+        <a href="mailto:ecreporting@proton.me" class="contact-email">ecreporting@proton.me</a>
+        <p class="contact-bar-note">We typically respond within one business day. Include a brief description of your project or use case.</p>
+      </div>
+      <a href="mailto:ecreporting@proton.me" class="contact-cta">Send an email ↗</a>
+    </div>
+
+  </div>
+</section>
+
   <!-- ── Footer ─────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="footer-name">EcoDisclosure</div>
-    <div>© 2026 — Environmental property information for informed decisions.</div>
-    <div class="footer-small">Powered by ArcGIS Living Atlas · FEMA · EPA · NOAA · USGS · NPS · BLS · Census</div>
-  </footer>
+<footer class="footer">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
+    <img src="ecr.png" alt="Environmental Context Reporting Logo" style="height: 24px; width: auto;">
+    <div class="footer-name">Environmental Context Reporting</div>
+  </div>
+  <div>© 2026 — Environmental property information for informed decisions.</div>
+  <div class="footer-small">Powered by ArcGIS Living Atlas · FEMA · EPA · NOAA · USGS · NPS · BLS · Census</div>
+</footer>
 
   <script src="services.js"></script>
   <script src="query.js"></script>

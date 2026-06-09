@@ -800,7 +800,7 @@ function addLayerControlPanel() {
 function initSplash() {
     // Use sessionStorage so it shows once per tab session,
     // clears automatically when the tab is closed.
-    if (sessionStorage.getItem("ecodisclosure_splash_accepted")) {
+    if (sessionStorage.getItem("ecr_splash_accepted")) {
         document.getElementById("splashOverlay")?.remove();
         return;
     }
@@ -820,7 +820,7 @@ function initSplash() {
     });
 
     function dismissSplash() {
-        sessionStorage.setItem("ecodisclosure_splash_accepted", "1");
+        sessionStorage.setItem("ecr_splash_accepted", "1");
         document.body.style.overflow = "";
         overlay.classList.add("dismissing");
         overlay.addEventListener("animationend", () => overlay.remove(), { once: true });
@@ -857,7 +857,7 @@ function exportToPDF() {
     exportBtn.disabled = true;
     exportBtn.textContent = "Preparing PDF…";
 
-    const address = (document.getElementById("reportAddress")?.innerText || "ecodisclosure-report")
+    const address = (document.getElementById("reportAddress")?.innerText || "environmental-context-report")
         .replace(/[^a-z0-9]/gi, "-")
         .replace(/-+/g, "-")
         .toLowerCase()

@@ -1,5 +1,5 @@
 /* ============================================================
-   ECODISCLOSURE — Refined Editorial Dashboard
+   ECR — Refined Editorial Dashboard
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap');
@@ -7,8 +7,8 @@
 /* ── Tokens ─────────────────────────────────────────────── */
 :root {
   --green-950: #0f2210;
-  --green-900: #1a3a1b;
-  --green-800: #2c5f2d;
+  --green-900: #293f2a;
+  --green-800: #537254;
   --green-700: #3a7a3b;
   --green-600: #4a8c4a;
   --green-500: #5fa85f;
@@ -44,6 +44,11 @@
 
   --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+
+
+
+
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
@@ -84,18 +89,86 @@ body {
   );
   pointer-events: none;
 }
+
+
+
+/* Hero content - top row with brand and logo */
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 1320px;
-  margin: auto;
+  margin: 0 auto 24px auto;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 32px;
   flex-wrap: wrap;
 }
-.hero-brand { flex: 1; min-width: 260px; }
+
+/* Wrapper for badges - full width of hero */
+.hero-badges-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Alternative: if you want badges centered but aligned with content below */
+.hero-badges-start {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.hero-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hero-logo img {
+  display: block;
+  object-fit: contain;
+}
+
+.hero-brand {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .hero-logo {
+    align-self: center;
+    margin-top: 16px;
+  }
+  .hero-logo img {
+    height: 70px;
+  }
+  .hero-badges {
+    justify-content: center;
+  }
+}
+
+.hero-brand { flex: auto; min-width: 260px; }
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -819,6 +892,7 @@ button:active { transform: translateY(1px) !important; }
 .risk-disclaimer-body p:last-child { margin: 0; }
 
 /* ── Splash Screen ───────────────────────────────────────── */
+
 .splash-overlay {
   position: fixed;
   inset: 0;
@@ -1218,4 +1292,177 @@ button:active { transform: translateY(1px) !important; }
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+}
+
+/* ── Contact Section ─────────────────────────────────────── */
+.contact-section {
+  background: var(--green-900);
+  border-top: 1px solid var(--green-600);
+  padding: 64px 24px 72px;
+}
+
+.contact-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.contact-header {
+  margin-bottom: 36px;
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--ink-50);
+  margin: 8px 0 10px;
+  letter-spacing: -0.3px;
+}
+
+.contact-title em {
+  font-style: italic;
+  color: var(--amber-400);
+}
+
+.contact-sub {
+  font-size: 15px;
+  color: var(--ink-500);
+  margin: 0;
+  max-width: 580px;
+  line-height: 1.65;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.contact-card {
+  background: var(--white);
+  border: 1px solid var(--green-600);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.contact-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.contact-card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(193,122,48,0.12);
+  border: 1px solid rgba(193,122,48,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--amber-400);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.contact-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-900);
+  margin-bottom: 7px;
+}
+
+.contact-card-body {
+  font-size: 13px;
+  color: var(--ink-500);
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.contact-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.contact-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(42,130,116,0.12);
+  border: 1px solid var(--green-600);
+  color: var(--green-200);
+}
+
+.contact-bar {
+  background: var(--white);
+  border: 1px solid var(--green-600);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.contact-bar-left { flex: 1; min-width: 0; }
+
+.contact-bar-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  margin-bottom: 4px;
+}
+
+.contact-email {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--amber-400);
+  text-decoration: none;
+  margin-bottom: 5px;
+  transition: color var(--transition);
+}
+
+.contact-email:hover { color: var(--amber-100); }
+
+.contact-bar-note {
+  font-size: 12px;
+  color: var(--ink-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.contact-cta {
+  background: var(--amber-500);
+  color: var(--amber-50);
+  border-radius: var(--radius-md);
+  padding: 13px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 2px 8px rgba(193,122,48,0.3);
+}
+
+.contact-cta:hover {
+  background: var(--amber-400);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(193,122,48,0.35);
+}
+
+@media (max-width: 768px) {
+  .contact-section  { padding: 44px 20px 56px; }
+  .contact-title    { font-size: 26px; }
+  .contact-grid     { grid-template-columns: 1fr; }
+  .contact-bar      { flex-direction: column; align-items: stretch; }
+  .contact-cta      { text-align: center; }
 }
