@@ -25,12 +25,16 @@ const LAYER_STYLES = {
     congressionalDistricts:{ label: "Congressional District" },
     nrhpPoints:   { label: "NRHP Historic Sites (Points)",   color: "#7b1a1a", fillColor: "#c0392b", radius: 7, fillOpacity: 0.85, weight: 1.5, type: "point" },
     nrhpPolygons: { label: "NRHP Historic Districts (Polygons)", color: "#7b1a1a", fillColor: "#e8b4a0", fillOpacity: 0.45, weight: 1.5, type: "polygon" },
+    aviationFacilities:       { label: "Aviation Facilities",       color: "#4e394e", fillColor: "#e5d6e7", radius: 8,  fillOpacity: 0.85, weight: 1.5, type: "point" },
+    railroads:         { label: "Railroads",      color: "#0b0e11", weight: 3, opacity: 0.85, type: "line" },
+
 };
 
 const DEFAULT_VISIBLE_LAYERS = [
     "parks", "trails", "wetlands", "riversStreams", "floodZones",
     "wildfires", "thermalHotspots", "superfundSites", "hazardousWaste",
-    "brownfields", "waterPollution", "alternateFuelStations", "airQuality", "contours"
+    "brownfields", "waterPollution", "alternateFuelStations", "airQuality", "contours",
+    "aviationFacilities", "railroads"
 ];
 
 // ======================================================
