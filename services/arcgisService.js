@@ -349,6 +349,26 @@ nrhpPolygons: {
             interval: num(a.contourinterval),
             type: { 10101: "Normal Intermediate", 10102: "Normal Index", 10103: "Normal Supplemental" }[a.fcode] || "Contour"
         }))
+    },
+    aviation facilities: {
+        url: "https://services.arcgis.com/xOi1kZaI0eWDREZv/ArcGIS/rest/services/NTAD_Aviation_Facilities/FeatureServer/0",
+        radius: 10, queryType: "distance",
+        outFields: ["ARPT_NAME", "ACREAGE", "CITY", "ELEV", "ELEV_METHOD_CODE", "FACILITY_USE_CODE", "OWNERSHIP_TYPE_CODE", "FACILITY_USE_CODE", "SITE_TYPE_CODE"],
+        normalize: (features) => normalizeFeatures(features, (a) => ({
+            dataset: "aviation facilities", name: a.ARPT_NAME || "Unknown Airport",
+            city: a.CITY || null,
+            elevationFt: num(a.ELEV),
+            facility use: a.FACILITY_USE_CODE || null, ownership: a.OWNERSHIP_TYPE_CODE || null
+        }))
+    },
+    railroads: {
+        url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/ArcGIS/rest/services/Transportation_v1/FeatureServer/9",
+        radius: 3, queryType: "distance",
+        outFields: ["NAME", "BASENAME", "SUFTYP", "SUFTYPEABRV"],
+        normalize: (features) => normalizeFeatures(features, (a) => ({
+            dataset: "railroads", name: a.BASENAME || "Unknown Railroad"
+
+        }))
     }
 };
 
